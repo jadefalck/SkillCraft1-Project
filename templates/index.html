@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Plotly Example</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #1f77b4;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label, select, input {
+            font-size: 16px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        select {
+            padding: 5px;
+            width: 200px;
+        }
+
+        input[type="submit"] {
+            background-color: #1f77b4;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #155a8a;
+        }
+
+        .description {
+            text-align: left;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<section>
+    <h1>Interactive Plot Selector</h1>
+    <form method="POST" action="{{ url_for('plot') }}">
+        <label for="plot_type">Select a plot type:</label>
+        <select name="plot_type" id="plot_type">
+            <option value="TotalHours">Total Hours</option>
+            <option value="APM">APM</option>
+            <option value="NumberOfPACs">Number Of PAC's</option>
+            <option value="GapBetweenPACs">Gap Between PAC's</option>
+            <option value="SelectByHotkeys">Select By Hotkeys</option>
+            <option value="Age">Age</option>
+        </select>
+        <input type="submit" value="Generate Plot">
+    </form>
+
+    <div class="description" id="description">
+        <!-- Descriptions seront ajoutées ici -->
+    </div>
+</section>
+
+<section>
+    <h1>Models</h1>
+</section>
+
+<!-- Model 1: Linear Regression -->
+<section>
+    <h2>Linear Regression</h2>
+    <p>
+        Mean Squared Error (MSE): 0.019964830750492806
+        <br>
+        R-squared (R²): 0.5543022003294026
+    </p>
+
+    <!-- Display the coefficients table here -->
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Coefficient</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Add rows for each feature and coefficient -->
+            <tr>
+                <td>Age</td>
+                <td>0.008472</td>
+            </tr>
+            <!-- Repeat for other features -->
+        </tbody>
+    </table>
+
+    <!-- Add the linear regression graph here -->
+    <div id="LinearRegression">
+        <!-- Replace with the actual linear regression graph -->
+        <!-- You can embed the Plotly graph or use an image, depending on your preference -->
+        <img src="image/LinearRegression.png" alt="Linear Regression Graph">
+    </div>
+</section>
+
+<!-- Model 2: Support Vector Regression (SVR) -->
+<section>
+    <h2>Support Vector Regression (SVR)</h2>
+    <p>
+        Best Parameters: {'svr__C': 0.1, 'svr__epsilon': 0.1, 'svr__kernel': 'rbf'}
+        <br>
+        Mean Squared Error (MSE): 0.02131464064535061
+        <br>
+        R-squared (R²): 0.5241688469526466
+    </p>
+
+    <!-- Display the SVR permutation importances here -->
+    <ul>
+        <!-- Add list items for each feature and importance -->
+        <li>Age: 0.012994116693220925</li>
+        <!-- Repeat for other features -->
+    </ul>
+
+    <!-- Add the SVR graph here -->
+    <div id="svr-graph">
+        <!-- Replace with the actual SVR graph -->
+        <img src="image/SVR.png" alt="SVR Graph">
+    </div>
+</section>
+
+<!-- Model 3: Elastic Net Regression -->
+<section>
+    <h2>Elastic Net Regression</h2>
+    <p>
+        Best Parameters: {'alpha': 0.046415888336127774, 'l1_ratio': 0.01}
+        <br>
+        Mean Squared Error (MSE): 0.01926698373143444
+        <br>
+        R-squared (R²): 0.5698810391779774
+    </p>
+
+    <!-- Display the elastic net coefficients table here -->
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Coefficient</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Add rows for each feature and coefficient -->
+            <tr>
+                <td>Age</td>
+                <td>0.006940</td>
+            </tr>
+            <!-- Repeat for other features -->
+        </tbody>
+    </table>
+
+    <!-- Add the elastic net graph here -->
+    <div id="elastic-net-graph">
+        <!-- Replace with the actual elastic net graph -->
+        <img src="image/ElasticNetRegression.png" alt="Elastic Net Graph">
+    </div>
+</section>
+
+<!-- Model Comparison Graph -->
+<section>
+    <h2>Model Comparison: MSE and R²</h2>
+    <!-- Add the model comparison graph here -->
+    <div id="model-comparison-graph">
+        <!-- Replace with the actual model comparison graph -->
+        <!-- You can embed the Plotly graph or use an image, depending on your preference -->
+        <img src="image/ModelComparison.png" alt="Model Comparison Graph">
+    </div>
+</section>
+</body>
+</html>

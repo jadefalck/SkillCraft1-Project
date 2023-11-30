@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Graph</title>
+    <!-- Charger la bibliothèque Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #graph {
+            margin-top: 20px;
+        }
+
+        .description {
+            text-align: left;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Emplacement pour le graphique interactif -->
+    <div id="graph"></div>
+
+    <div class="description" id="TotalHours">
+        <p>Description for Total Hours vs League Index: This graph shows the relationship between the total hours played and the league index. Analyze the trends and patterns in the data to draw insights.</p>
+    </div>
+    <div class="description" id="APM">
+        <p>Description for APM vs League Index: This graph illustrates the correlation between Actions Per Minute (APM) and the league index. Examine how APM impacts the league index.</p>
+    </div>
+    <div class="description" id="NumberOfPACs">
+        <p>Description for Number of PACs vs League Index: Explore the connection between the number of Performed Actions Commands (PACs) and the league index. Analyze the significance of PACs in the context of the league index.</p>
+    </div>
+    <div class="description" id="GapBetweenPACs">
+        <p>Description for Gap Between PACs vs League Index: This graph explores the impact of the gap between PACs on the league index. Consider how the time intervals between PACs influence the league index.</p>
+    </div>
+    <div class="description" id="SelectByHotkeys">
+        <p>Description for Select By Hotkeys vs League Index: Investigate the relationship between the use of hotkeys for selection and the league index. Examine the role of hotkeys in determining the league index.</p>
+    </div>
+    <div class="description" id="Age">
+        <p>Description for Age vs League Index: Analyze the relationship between the age of players and their league index. Explore how age may influence performance in the context of the league index.</p>
+    </div>
+
+    <script>
+        // Charger les données du graphique depuis Flask
+        var graph_data = {{ graph_json | tojson | safe }};
+        // Afficher le graphique interactif
+        Plotly.newPlot('graph', JSON.parse(graph_data));
+
+        // Fonction pour afficher la description correspondant au graphique sélectionné
+        function updateDescription(selectedPlotType) {
+            // Masquer toutes les descriptions
+            var descriptions = document.querySelectorAll('.description');
+            descriptions.forEach(function(description) {
+                description.style.display = 'none';
+            });
+
+            // Afficher la description correspondant au graphique sélectionné
+            var selectedDescription = document.getElementById(selectedPlotType + '-description');
+            if (selectedDescription) {
+                selectedDescription.style.display = 'block';
+            }
+        }
+
+        // Ajouter les descriptions lors de la sélection du graphique
+        var plotTypeSelect = document.getElementById("plot_type");
+
+        plotTypeSelect.addEventListener("change", function() {
+            var selectedPlotType = plotTypeSelect.value;
+            updateDescription(selectedPlotType);
+        });
+
+        // Afficher la description initiale
+        var initialPlotType = plotTypeSelect.value;
+        updateDescription(initialPlotType);
+    </script>
+
+</body>
+</html>
